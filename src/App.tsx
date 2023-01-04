@@ -1,15 +1,19 @@
-import React from 'react';
+import { FC } from 'react';
 import './App.css';
 import { ThemeProvider } from '@mui/material/styles';
-import Theme from './Theme';
-import { BrowserRouter as Router } from "react-router-dom";
-import { Typography } from '@mui/material';
+import defaultTheme from './Theme';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import CssBaseline from '@mui/material/CssBaseline';
+import { BaseLayout } from './layouts';
 
-function App() {
+const App: FC = () => {
   return (
     <Router>
-      <ThemeProvider theme={Theme}>
-        <Typography variant="h3">Hello World!</Typography>
+      <ThemeProvider theme={defaultTheme}>
+        <CssBaseline />
+        <Routes>
+          <Route path='/' element={<BaseLayout />}></Route>
+        </Routes>
       </ThemeProvider>
     </Router>
   );
