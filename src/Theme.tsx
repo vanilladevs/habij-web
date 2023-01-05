@@ -10,6 +10,9 @@ const defaultTheme = createTheme({
     text: {
       primary: "#fff",
     },
+    primary: {
+      main: "#42A5F5"
+    },
     secondary: {
       main: "#fff"
     }
