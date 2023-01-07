@@ -1,8 +1,6 @@
 import { FC, Fragment, useState } from "react";
-import { IconButton, Button, ListItemButton, ListItemText, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions } from '@mui/material';
+import { IconButton, Button, ListItemButton, ListItemText, Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Typography } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
-import { palette } from "@mui/system";
-import { green } from "@mui/material/colors";
 
 export const NumericHabit: FC = () => {
   const [open, setOpen] = useState(false);
@@ -18,7 +16,7 @@ export const NumericHabit: FC = () => {
   return (
     <Fragment>
       <ListItemButton onClick={handleClickOpen} sx={{ background: "#1e1e1e", boxShadow: "", borderRadius: 2, mt: 1 }}>
-        <ListItemText primary="salam" secondary="2 Pages" />
+        <ListItemText primary="salam" secondary={<Fragment><Typography color={"secondary.light"} variant="caption">2 Pages</Typography></Fragment>} />
         <IconButton edge="end" aria-label="delete">
           <CheckIcon sx={{ color: "green" }} />
         </IconButton>

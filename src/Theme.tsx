@@ -9,12 +9,15 @@ const defaultTheme = createTheme({
     },
     text: {
       primary: "#fff",
+      secondary: "#1e1e1e",
     },
     primary: {
-      main: "#42A5F5"
+      main: "#42A5F5",
+      light: "#29B6F6"
     },
     secondary: {
-      main: "#fff"
+      main: "#fff",
+      light: "#ffffffb3"
     }
   },
 });
