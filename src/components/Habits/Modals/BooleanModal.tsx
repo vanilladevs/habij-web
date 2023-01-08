@@ -1,5 +1,6 @@
 import { FC, Fragment, useState } from "react";
-import { Dialog, DialogTitle, DialogContent, Typography, TextField, ListItemButton, ListItemText } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Typography, TextField, ListItemButton, ListItemText, DialogActions, Button } from '@mui/material';
+import { DaysOfWeek } from "../DaysOfWeek";
 
 export const BooleanModal: FC = () => {
   const [open, setOpen] = useState(false);
@@ -21,8 +22,15 @@ export const BooleanModal: FC = () => {
           <Typography color={"secondary.light"} sx={{display: "block"}} variant="caption">Let’s define your habit</Typography>
         </DialogTitle>
         <DialogContent sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
-        <TextField placeholder="e.g. Excercise" focused id="standard-basic" label={<Fragment><Typography color={"secondary.light"} variant="subtitle2">Title</Typography></Fragment>} variant="standard" />
+        <TextField fullWidth placeholder="e.g. Excercise" focused id="standard-basic" label={<Fragment><Typography color={"secondary.light"} variant="subtitle2">Title</Typography></Fragment>} variant="standard" />
+        <DaysOfWeek></DaysOfWeek>
         </DialogContent>
+        <DialogActions sx={{ display: "flex", px: 3, justifyContent: "space-between", background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
+          <Button onClick={handleClose} variant="outlined">BACK</Button>
+          <Button onClick={handleClose} variant="contained" autoFocus>
+            SAVE
+          </Button>
+        </DialogActions>
       </Dialog>
     </Fragment>
 
