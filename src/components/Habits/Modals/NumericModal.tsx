@@ -81,7 +81,7 @@ export const NumericModal: FC = () => {
             />
 
             <Grid container spacing={2} mt={.5}>
-              <Grid item xs={6}>
+              <Grid item xs={6}>toggleDrawer
                 <FormControl fullWidth>
                   <Select
                     labelId="demo-simple-select-label"
@@ -136,7 +136,7 @@ export const NumericModal: FC = () => {
 
             <DaysOfWeek></DaysOfWeek>
             <Box mt={4} sx={{ display: "flex", justifyContent: "space-between", background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
-              <Button variant="outlined">BACK</Button>
+              <Button variant="outlined" onClick={toggleDrawer(false)}>BACK</Button>
               <Button variant="contained" autoFocus>
                 SAVE
               </Button>
