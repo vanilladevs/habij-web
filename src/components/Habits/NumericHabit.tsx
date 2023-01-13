@@ -3,6 +3,7 @@ import { IconButton, Button, ListItemButton, ListItemText, Dialog, DialogTitle, 
 import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import { red } from "@mui/material/colors";
 
 export const NumericHabit: FC = () => {
   const [open, setOpen] = useState(false);
@@ -17,15 +18,15 @@ export const NumericHabit: FC = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if(!event.target.value) setCount(0)
+    if (!event.target.value) setCount(0)
     else setCount(parseInt(event.target.value))
   }
 
   const increaseCount = () => {
-    setCount((prevState) => prevState +1)
+    setCount((prevState) => prevState + 1)
   }
   const decreaseCount = () => {
-    setCount((prevState) => prevState -1)
+    setCount((prevState) => prevState === 0 ? 0 : prevState - 1)
   }
 
 
@@ -49,12 +50,18 @@ export const NumericHabit: FC = () => {
             alignItems="stretch"
             spacing={0}>
             <Button onClick={decreaseCount} variant="contained" sx={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}><HorizontalRuleIcon /></Button>
-            <TextField type={"number"} value={count} onChange={handleChange} sx={{ '& fieldset': {borderRadius: 0} }} />
+            <TextField
+              type={"number"}
+              value={count}
+              onChange={handleChange}
+              sx={{ '& fieldset': { borderRadius: 0 } }}
+              inputProps={{ min: 0, style: { textAlign: 'center' } }}
+            />
             <Button onClick={increaseCount} variant="contained" sx={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}><AddIcon /></Button>
           </Stack>
           <Box mt={2} textAlign={"center"}>
-          <Typography variant="subtitle1">Daily Goal</Typography>
-          <Typography variant="caption" color={"secondary.light"}>Less than 15 cigarettes</Typography>
+            <Typography variant="subtitle1">Daily Goal</Typography>
+            <Typography variant="caption" color={"secondary.light"}>Less than 15 cigarettes</Typography>
           </Box>
         </DialogContent>
         <DialogActions sx={{ display: "flex", px: 3, justifyContent: "space-between", background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
