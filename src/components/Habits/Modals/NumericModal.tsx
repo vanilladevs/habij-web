@@ -5,7 +5,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export const NumericModal: FC = () => {
   const [open, setOpen] = useState(false);
-  const [dropDownValue, setDropDownValue] = useState('');
+  const [dropDownValue, setDropDownValue] = useState('At Least');
 
 
   const [form, setForm] = useState({
@@ -39,6 +39,8 @@ export const NumericModal: FC = () => {
     setDropDownValue(event.target.value as string);
   };
 
+  console.log(dropDownValue)
+
   return (
     <Fragment>
       <ListItemButton onClick={toggleDrawer(true)} sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #0E0E0E", boxShadow: "", borderRadius: 2, mt: 1 }}>
@@ -65,7 +67,7 @@ export const NumericModal: FC = () => {
               error={form.habit === ""}
               helperText={form.habit === "" ? 'This field is required!' : ' '}
               fullWidth
-              placeholder="e.g. Excercise"
+              placeholder="e.g. Reading"
               focused
               id="standard-basic"
               label={
@@ -84,13 +86,13 @@ export const NumericModal: FC = () => {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    defaultValue={'atleast'}
+                    defaultValue={'At Least'}
                     onChange={handleChange}
                     sx={{ color: "secondary.light" }}
                   >
-                    <MenuItem value={'atleast'}>At Least</MenuItem>
-                    <MenuItem value={'lessthan'}>Less Than</MenuItem>
-                    <MenuItem value={'exactly'}>Exactly</MenuItem>
+                    <MenuItem value={'At Least'}>At Least</MenuItem>
+                    <MenuItem value={'Less Than'}>Less Than</MenuItem>
+                    <MenuItem value={'Exactly'}>Exactly</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -103,7 +105,7 @@ export const NumericModal: FC = () => {
                   error={form.goal === ""}
                   helperText={form.goal === "" ? 'This field is required!' : ' '}
                   fullWidth
-                  placeholder="Goal"
+                  placeholder="Goal, e.g. 20"
                   variant="outlined" />
               </Grid>
 
@@ -115,7 +117,7 @@ export const NumericModal: FC = () => {
                   error={form.unit === ""}
                   helperText={form.unit === "" ? 'This field is required!' : ' '}
                   fullWidth
-                  placeholder="Unit"
+                  placeholder="Unit, e.g. Pages"
                   variant="outlined" />
 
               </Grid>
@@ -123,7 +125,12 @@ export const NumericModal: FC = () => {
                 a day.
               </Grid>
               <Grid item xs={12}>
-                <Typography color={"secondary.light"} variant="subtitle1" textAlign={"center"}>At least {form.unit} {form.goal} a day.</Typography>
+                <Typography
+                  color={"secondary.light"}
+                  variant="subtitle1"
+                  textAlign={"center"}>
+                  {dropDownValue} {form.goal === '' ? '[ Goal ]' : form.goal} {form.unit === '' ? '[ Unit ]' : form.unit}  a day.
+                </Typography>
               </Grid>
             </Grid>
 
