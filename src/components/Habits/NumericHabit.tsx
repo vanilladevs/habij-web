@@ -3,7 +3,6 @@ import { IconButton, Button, ListItemButton, ListItemText, Dialog, DialogTitle, 
 import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
-import { red } from "@mui/material/colors";
 
 export const NumericHabit: FC = () => {
   const [open, setOpen] = useState(false);
