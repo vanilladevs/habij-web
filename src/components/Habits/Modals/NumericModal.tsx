@@ -38,13 +38,27 @@ export const NumericModal: FC = () => {
         <Box
           p={2} sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }} role="presentation"
         >
-          <Box sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
+          <Box mb={4} sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
             Create Habit
             <Typography color={"secondary.light"} sx={{ display: "block" }} variant="caption">Let’s define your habit</Typography>
           </Box>
           <Box sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
 
-            <TextField fullWidth placeholder="e.g. Excercise" focused id="standard-basic" label={<Fragment><Typography color={"secondary.light"} variant="subtitle2">Title</Typography></Fragment>} variant="standard" />
+            <TextField
+              fullWidth
+              placeholder="e.g. Excercise"
+              focused
+              id="standard-basic"
+              label={
+                <Fragment>
+                  <Typography color={"secondary.light"} variant="subtitle2">
+                    Title
+                  </Typography>
+                </Fragment>
+              }
+              variant="standard"
+            />
+
             <Grid container spacing={2} mt={.5}>
               <Grid item xs={6}>
                 <FormControl fullWidth>
