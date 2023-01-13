@@ -2,10 +2,10 @@ import { FC, useState } from "react";
 import { Box } from '@mui/material';
 import { CalendarTile } from "./CalendarTile";
 import dayjs from 'dayjs';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
-
-// get date as input and change range based on selected date
-// const getWeekDays = (start, range)
 const getWeekDays = () => {
   const today = dayjs();
 
@@ -36,12 +36,41 @@ export const Calendar: FC = () => {
   }
 
   return (
-    <Box px={2} mt={2} sx={{ display: "flex", overflow: "hidden", overflowX: "overlay" }} onClick={getWeekDays}>
+    <Box px={2} mt={2} onClick={getWeekDays} sx={{ width: "100%", display: "block" }}>
+      <Slider slidesToShow={19} dots={false} initialSlide={13}
+      infinite={true} arrows={false}
+       slidesToScroll={7}
+       responsive={[        {
+        breakpoint: 1260,
+        settings: {
+          slidesToShow: 15,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 915,
+        settings: {
+          slidesToShow: 10,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 7,
+        }
+      },
+      {
+        breakpoint: 445,
+        settings: {
+          slidesToShow: 5,
+        }
+      }]}>
 
       {
         getWeekDays().map((fullDate) => 
         (<CalendarTile onClick={() => chooseDate(fullDate)} key={fullDate} date={fullDate} isSelected={fullDate === selected} ></CalendarTile>))
       }
+      </Slider>
       
     </Box>
   )
