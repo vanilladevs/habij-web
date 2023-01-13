@@ -7,6 +7,19 @@ export const NumericModal: FC = () => {
   const [open, setOpen] = useState(false);
   const [dropDownValue, setDropDownValue] = useState('');
 
+
+  const [form, setForm] = useState({
+    unit: "",
+    goal: "",
+    habit: "",
+  });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setForm({ ...form, [name]: value });
+  };
+
+
   const toggleDrawer =
     (open: boolean) =>
       (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -25,6 +38,7 @@ export const NumericModal: FC = () => {
   const handleChange = (event: SelectChangeEvent) => {
     setDropDownValue(event.target.value as string);
   };
+
   return (
     <Fragment>
       <ListItemButton onClick={toggleDrawer(true)} sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #0E0E0E", boxShadow: "", borderRadius: 2, mt: 1 }}>
@@ -45,6 +59,11 @@ export const NumericModal: FC = () => {
           <Box sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
 
             <TextField
+              value={form.habit}
+              name={"habit"}
+              onChange={handleInputChange}
+              error={form.habit === ""}
+              helperText={form.habit === "" ? 'This field is required!' : ' '}
               fullWidth
               placeholder="e.g. Excercise"
               focused
@@ -75,19 +94,36 @@ export const NumericModal: FC = () => {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={6}>
-                <TextField fullWidth placeholder="Goal" variant="outlined" />
 
-              </Grid>
               <Grid item xs={6}>
-                <TextField fullWidth placeholder="Unit" variant="outlined" />
+                <TextField
+                  value={form.goal}
+                  name={"goal"}
+                  onChange={handleInputChange}
+                  error={form.goal === ""}
+                  helperText={form.goal === "" ? 'This field is required!' : ' '}
+                  fullWidth
+                  placeholder="Goal"
+                  variant="outlined" />
+              </Grid>
+
+              <Grid item xs={6}>
+                <TextField
+                  value={form.unit}
+                  name={"unit"}
+                  onChange={handleInputChange}
+                  error={form.unit === ""}
+                  helperText={form.unit === "" ? 'This field is required!' : ' '}
+                  fullWidth
+                  placeholder="Unit"
+                  variant="outlined" />
 
               </Grid>
               <Grid item xs={6} alignSelf={"center"}>
                 a day.
               </Grid>
               <Grid item xs={12}>
-                <Typography color={"secondary.light"} variant="subtitle1" textAlign={"center"}>At least 2 pages a day.</Typography>
+                <Typography color={"secondary.light"} variant="subtitle1" textAlign={"center"}>At least {form.unit} {form.goal} a day.</Typography>
               </Grid>
             </Grid>
 
