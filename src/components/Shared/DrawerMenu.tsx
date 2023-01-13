@@ -1,11 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, IconButton } from '@mui/material';
 import BathtubIcon from '@mui/icons-material/Bathtub';
 import DehazeIcon from '@mui/icons-material/Dehaze';
 
 
 const DrawerMenu: FC = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const toggleDrawer =
     (open: boolean) =>

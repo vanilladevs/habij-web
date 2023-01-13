@@ -1,5 +1,5 @@
 import { FC, Fragment, useState } from "react";
-import { Dialog, DialogTitle, DialogContent, Button, Typography, List } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Button, Typography, List, Drawer, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { BooleanModal } from "./BooleanModal";
 import { NumericModal } from "./NumericModal";
@@ -9,31 +9,45 @@ import { TimeModal } from "./TimeModal";
 export const MeasurementModal: FC = () => {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const toggleDrawer =
+    (open: boolean) =>
+      (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+          event.type === 'keydown' &&
+          ((event as React.KeyboardEvent).key === 'Tab' ||
+            (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+          return;
+        }
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+        setOpen(open);
+      };
   return (
     <Fragment>
-      <Button variant="contained" endIcon={<AddIcon />} onClick={handleClickOpen} sx={{ borderRadius: 64 }} >
+      <Button variant="contained" endIcon={<AddIcon />} onClick={toggleDrawer(true)} sx={{ borderRadius: 64 }} >
         Habit
       </Button>
-      <Dialog open={open} onClose={handleClose} >
-        <DialogTitle sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
+      <Drawer 
+      anchor="bottom"
+      open={open}
+      sx={{ borderRadius: "40px" }}
+      onClose={toggleDrawer(false)}>
+        <Box p={2} sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }} role="presentation"
+      >
+
+      <Box sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
           Measurement
           <Typography color={"secondary.light"} sx={{display: "block"}} variant="caption">How do you want to measure your progress?</Typography>
-        </DialogTitle>
-        <DialogContent sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
+        </Box>
+        <Box sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
           <List>
             <BooleanModal></BooleanModal>
             <NumericModal></NumericModal>
             <TimeModal></TimeModal>
           </List>
-        </DialogContent>
-      </Dialog>
+        </Box>
+        </Box>
+      </Drawer>
     </Fragment>
   )
 }
