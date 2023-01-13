@@ -2,21 +2,40 @@ import { FC, Fragment, useState } from "react";
 import { Dialog, DialogTitle, DialogContent, Typography, TextField, ListItemButton, Box, Button, ListItemText, MenuItem, Drawer, FormControl, Grid } from '@mui/material';
 import { DaysOfWeek } from "../DaysOfWeek";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { ErrorSharp } from "@mui/icons-material";
 
 export const NumericModal: FC = () => {
   const [open, setOpen] = useState(false);
   const [dropDownValue, setDropDownValue] = useState('At Least');
-
-
+  const [errors, setErrors] = useState<string[]>([]);
   const [form, setForm] = useState({
     unit: "",
     goal: "",
     habit: "",
   });
 
+  const validateFields = () => {
+    const tempErrors = []
+    if (form.habit === '') {
+      tempErrors.push("habit")
+    }
+    if (form.goal === '') {
+      tempErrors.push("goal")
+    }
+    if (form.unit === '') {
+      tempErrors.push("unit")
+    }
+    setErrors(tempErrors)
+
+    return tempErrors.length === 0
+  };
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
+    if (value !== '') {
+      setErrors(errors.filter(e => e !== name))
+    }
   };
 
 
@@ -39,7 +58,9 @@ export const NumericModal: FC = () => {
     setDropDownValue(event.target.value as string);
   };
 
-  console.log(dropDownValue)
+  const handleSubmit = () => {
+    if (!validateFields()) return
+  }
 
   return (
     <Fragment>
@@ -64,8 +85,8 @@ export const NumericModal: FC = () => {
               value={form.habit}
               name={"habit"}
               onChange={handleInputChange}
-              error={form.habit === ""}
-              helperText={form.habit === "" ? 'This field is required!' : ' '}
+              error={errors.includes("habit")}
+              helperText={errors.includes("habit") ? 'This field is required!' : ' '}
               fullWidth
               placeholder="e.g. Reading"
               focused
@@ -81,7 +102,7 @@ export const NumericModal: FC = () => {
             />
 
             <Grid container spacing={2} mt={.5}>
-              <Grid item xs={6}>toggleDrawer
+              <Grid item xs={6}>
                 <FormControl fullWidth>
                   <Select
                     labelId="demo-simple-select-label"
@@ -102,8 +123,8 @@ export const NumericModal: FC = () => {
                   value={form.goal}
                   name={"goal"}
                   onChange={handleInputChange}
-                  error={form.goal === ""}
-                  helperText={form.goal === "" ? 'This field is required!' : ' '}
+                  error={errors.includes("goal")}
+                  helperText={errors.includes("goal") ? 'This field is required!' : ' '}
                   fullWidth
                   placeholder="Goal, e.g. 20"
                   variant="outlined" />
@@ -114,8 +135,8 @@ export const NumericModal: FC = () => {
                   value={form.unit}
                   name={"unit"}
                   onChange={handleInputChange}
-                  error={form.unit === ""}
-                  helperText={form.unit === "" ? 'This field is required!' : ' '}
+                  error={errors.includes("unit")}
+                  helperText={errors.includes("unit") ? 'This field is required!' : ' '}
                   fullWidth
                   placeholder="Unit, e.g. Pages"
                   variant="outlined" />
@@ -136,8 +157,17 @@ export const NumericModal: FC = () => {
 
             <DaysOfWeek></DaysOfWeek>
             <Box mt={4} sx={{ display: "flex", justifyContent: "space-between", background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
-              <Button variant="outlined" onClick={toggleDrawer(false)}>BACK</Button>
-              <Button variant="contained" autoFocus>
+              <Button
+                variant="outlined"
+                onClick={toggleDrawer(false)}
+              >
+                BACK
+              </Button>
+              <Button
+                variant="contained"
+                autoFocus
+                onClick={handleSubmit}
+              >
                 SAVE
               </Button>
             </Box>
