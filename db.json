@@ -1,0 +1,76 @@
+{
+  "habits": [
+    {
+      "unit": "",
+      "goal": "",
+      "title": "meditation",
+      "measurmentType": "BooleanHabit",
+      "days": {
+        "Mon": true,
+        "Tue": true,
+        "Wed": true,
+        "Thu": true,
+        "Fri": true,
+        "Sat": true,
+        "Sun": true
+      },
+      "operation": "",
+      "value": "",
+      "id": 1
+    },
+    {
+      "unit": "pages",
+      "goal": "10",
+      "title": "read book",
+      "measurmentType": "NumericHabit",
+      "days": {
+        "Mon": true,
+        "Tue": false,
+        "Wed": true,
+        "Thu": false,
+        "Fri": true,
+        "Sat": false,
+        "Sun": true
+      },
+      "operation": "At Least",
+      "value": "",
+      "id": 2
+    },
+    {
+      "unit": "",
+      "goal": "",
+      "title": "call parent",
+      "measurmentType": "BooleanHabit",
+      "days": {
+        "Mon": false,
+        "Tue": false,
+        "Wed": false,
+        "Thu": false,
+        "Fri": true,
+        "Sat": false,
+        "Sun": false
+      },
+      "operation": "",
+      "value": "",
+      "id": 3
+    },
+    {
+      "unit": "hour",
+      "goal": "2",
+      "title": "video game",
+      "measurmentType": "NumericHabit",
+      "days": {
+        "Mon": false,
+        "Tue": false,
+        "Wed": true,
+        "Thu": false,
+        "Fri": false,
+        "Sat": true,
+        "Sun": false
+      },
+      "operation": "Less Than",
+      "value": "",
+      "id": 4
+    }
+  ]
+}

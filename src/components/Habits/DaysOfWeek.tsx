@@ -1,26 +1,31 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Box, FormGroup, FormControlLabel, Typography, Checkbox, Grid, FormControl } from '@mui/material';
 
-
-export const DaysOfWeek: FC = () => {
+interface DaysProps {
+  onSelected: (event: {[k in string]: boolean}) => void
+}
+export const DaysOfWeek: FC<DaysProps> = ({onSelected}) => {
   const [state, setState] = useState({
-    Monday: true,
-    Tuesday: true,
-    Wednesday: true,
-    Thursday: true,
-    Friday: true,
-    Saturday: true,
-    Sunday: true,
+    Mon: true,
+    Tue: true,
+    Wed: true,
+    Thu: true,
+    Fri: true,
+    Sat: true,
+    Sun: true,
   });
-  const { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = state;
+  const { Mon, Tue, Wed, Thu, Fri, Sat, Sun } = state;
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
+    setState(prev => ({
+      ...prev,
       [event.target.name]: event.target.checked,
-    });
+    }));
   };
   
+  useEffect(() => {
+    onSelected(state)
+  }, [state])
 
   return (
     <Box mt={2}>
@@ -39,25 +44,25 @@ export const DaysOfWeek: FC = () => {
       </FormControl>
       <Grid container spacing={2}>
         <Grid item xs={4}>
-            <FormControlLabel control={<Checkbox onChange={handleChange} checked={Monday} name="Monday" />} label="Monday" />
+            <FormControlLabel control={<Checkbox onChange={handleChange} checked={Mon} name="Mon" />} label="Monday" />
         </Grid>
         <Grid item xs={4}>
-            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Tuesday} name="Tuesday" />} label="Tuesday" />
+            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Tue} name="Tue" />} label="Tuesday" />
         </Grid>
         <Grid item xs={4}>
-            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Wednesday} name="Wednesday" />} label="Wednesday" />
+            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Wed} name="Wed" />} label="Wednesday" />
         </Grid>
         <Grid item xs={4}>
-            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Thursday} name="Thursday" />} label="Thursday" />
+            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Thu} name="Thu" />} label="Thursday" />
         </Grid>
         <Grid item xs={4}>
-            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Friday} name="Friday" />} label="Friday" />
+            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Fri} name="Fri" />} label="Friday" />
         </Grid>
         <Grid item xs={4}>
-            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Saturday} name="Saturday" />} label="Saturday" />
+            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Sat} name="Sat" />} label="Saturday" />
         </Grid>
         <Grid item xs={4}>
-            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Sunday} name="Sunday" />} label="Sunday" />
+            <FormControlLabel control={<Checkbox onChange={handleChange}  checked={Sun} name="Sun" />} label="Sunday" />
         </Grid>
       </Grid>
     </Box>

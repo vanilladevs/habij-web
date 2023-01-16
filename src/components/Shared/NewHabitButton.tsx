@@ -6,7 +6,7 @@ import { MeasurementModal } from "../Habits/Modals/MeasurementModal";
 export const NewHabitButton: FC = () => {
 
   return (
-    <Box sx={{ position: 'fixed', bottom: 80,right: 13 }}>
+    <Box sx={{ position: 'fixed', bottom: 80,right: 13, zIndex: 1 }}>
       <MeasurementModal></MeasurementModal>
     </Box>
   );
