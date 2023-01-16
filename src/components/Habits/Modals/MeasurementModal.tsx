@@ -41,8 +41,8 @@ export const MeasurementModal: FC = () => {
         </Box>
         <Box sx={{ background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
           <List>
-            <BooleanModal></BooleanModal>
-            <NumericModal></NumericModal>
+            <BooleanModal closeDrawer={(close)=> setOpen(close)}></BooleanModal>
+            <NumericModal closeDrawer={(close)=> setOpen(close)}></NumericModal>
             <TimeModal></TimeModal>
           </List>
         </Box>

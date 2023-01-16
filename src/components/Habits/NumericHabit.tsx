@@ -3,10 +3,17 @@ import { IconButton, Button, ListItemButton, ListItemText, Dialog, DialogTitle, 
 import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import { HabitWithId } from "../../types/habit";
 
-export const NumericHabit: FC = () => {
+interface NumericHabitProps {
+  habitData: HabitWithId
+}
+
+export const NumericHabit: FC<NumericHabitProps> = ({habitData}) => {
   const [open, setOpen] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(Number(habitData.goal));
+
+  
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,7 +39,7 @@ export const NumericHabit: FC = () => {
   return (
     <Fragment>
       <ListItemButton onClick={handleClickOpen} sx={{ background: "#1e1e1e", boxShadow: "", borderRadius: 2, mt: 1 }}>
-        <ListItemText primary="salam" secondary={<Fragment><Typography color={"secondary.light"} variant="caption">{count} Pages</Typography></Fragment>} />
+        <ListItemText primary={habitData.title} secondary={<Fragment><Typography color={"secondary.light"} variant="caption">{count} {habitData.unit}</Typography></Fragment>} />
         <IconButton edge="end" aria-label="delete">
           <CheckIcon sx={{ color: "green" }} />
         </IconButton>
@@ -60,7 +67,7 @@ export const NumericHabit: FC = () => {
           </Stack>
           <Box mt={2} textAlign={"center"}>
             <Typography variant="subtitle1">Daily Goal</Typography>
-            <Typography variant="caption" color={"secondary.light"}>Less than 15 cigarettes</Typography>
+            <Typography variant="caption" color={"secondary.light"}>{habitData.operation + " " + habitData.goal + " " + habitData.unit}</Typography>
           </Box>
         </DialogContent>
         <DialogActions sx={{ display: "flex", px: 3, justifyContent: "space-between", background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.05) 100%), #121212" }}>
